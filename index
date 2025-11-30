@@ -1,0 +1,200 @@
+<!--
+  index.html — Одностраничный сайт для размещения на GitHub Pages
+  Инструкции публикации (быстрое руководство):
+
+  1) Создайте новый публичный репозиторий на GitHub.
+     - Чтобы сделать сайт доступным по адресу https://<ваше-имя>.github.io, назовите репозиторий exactly: <ваше-имя>.github.io
+     - Или создайте репозиторий с любым именем и используйте GitHub Pages->Branch: main / gh-pages в настройках репозитория.
+
+  2) Склонируйте репозиторий локально и добавьте этот файл как index.html в корень:
+     git clone https://github.com/<ваше-имя>/<repo>.git
+     cd <repo>
+     # скопируйте сюда index.html (этот файл)
+     git add index.html
+     git commit -m "Add site index.html"
+     git push origin main
+
+  3) Перейдите в Settings -> Pages (или Pages в боковом меню) и выберите источник (branch:
+     main / root) и сохраните. Через минуту-другую сайт появится по адресу указанному в настройках.
+
+  4) Опционально: подключите свой домен через раздел Pages и добавьте CNAME в репозиторий.
+
+  Подсказки:
+  - Для тестирования локально просто откройте index.html в браузере или запустите: python -m http.server
+  - Хочешь — добавлю файлы: README.md, CNAME, и пример workflow для автоматического деплоя через GitHub Actions.
+-->
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Мой сайт — GitHub Pages</title>
+  <meta name="description" content="Простой и современный сайт, готовый для размещения на GitHub Pages">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1320; --muted:#9aa4b2; --accent:#6ee7b7; --glass: rgba(255,255,255,0.04);
+      --text:#e6eef6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,var(--bg),#071022); color:var(--text); -webkit-font-smoothing:antialiased;}
+
+    .container{max-width:1100px;margin:0 auto;padding:32px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#0ea5a6,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+    nav a:hover{color:var(--text)}
+
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:center;margin-bottom:40px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:14px;box-shadow: 0 6px 20px rgba(2,6,23,0.6);}
+
+    h1{font-size:36px;margin:0 0 12px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#062025;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .feature{padding:14px;border-radius:10px;background:var(--glass)}
+    .small{font-size:13px;color:var(--muted)}
+
+    .right-card{display:flex;flex-direction:column;gap:12px}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#FDE68A,#FCA5A5);display:flex;align-items:center;justify-content:center;font-weight:700}
+
+    footer{margin-top:48px;color:var(--muted);font-size:13px;text-align:center;padding-bottom:40px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .features{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .features{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+    }
+
+    /* light mode (optional) */
+    .light{--bg:#f6fafb; --card:#ffffff; --muted:#475569; --text:#071022; --glass: rgba(2,6,23,0.03); --accent:#06b6d4}
+    .theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:8px;color:var(--muted);cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">GH</div>
+        <div>
+          <div style="font-weight:700">Мой сайт на GitHub</div>
+          <div class="small">Готово к публикации: index.html</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">О сайте</a>
+        <a href="#features">Функции</a>
+        <a href="#contact">Контакты</a>
+        <button class="theme-toggle" id="themeToggle">Тема</button>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section class="card">
+        <h1>Простой, быстрый и красивый сайт для GitHub Pages</h1>
+        <p class="lead">Одностраничный шаблон: адаптивный дизайн, тёмная и светлая тема, секция контактов и готовая структура для дальнейшей доработки.</p>
+        <a class="cta" href="#contact">Связаться</a>
+
+        <div class="features" id="features">
+          <div class="feature">
+            <strong>Лёгкий деплой</strong>
+            <div class="small">Просто положите index.html в корень репозитория и включите Pages.</div>
+          </div>
+          <div class="feature">
+            <strong>Адаптивный</strong>
+            <div class="small">Подойдёт для мобильных телефонов и десктопов.</div>
+          </div>
+          <div class="feature">
+            <strong>Настраиваемый</strong>
+            <div class="small">Меняй тексты, цвета и секции по своему вкусу.</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card right-card">
+        <div class="profile">
+          <div class="avatar">VA</div>
+          <div>
+            <div style="font-weight:700">Владелец сайта</div>
+            <div class="small">Поставьте своё имя и ссылку на GitHub</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight:600;margin-bottom:6px">Статус проекта</div>
+          <div class="small">Готов к публикации. Хочешь — добавлю GitHub Actions workflow для автодеплоя.</div>
+        </div>
+
+        <div>
+          <div style="font-weight:600;margin-bottom:6px">Полезные команды</div>
+          <pre class="small" style="background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin:0">git init
+git add .
+git commit -m "Initial site"
+git branch -M main
+git remote add origin https://github.com/USERNAME/REPO.git
+git push -u origin main</pre>
+        </div>
+      </aside>
+    </main>
+
+    <section id="about" class="card" style="margin-bottom:24px">
+      <h2 style="margin-top:0">О шаблоне</h2>
+      <p class="small">Этот шаблон специально минималистичен — он легче для чтения и быстрого деплоя. Добавьте больше секций: блог, проекты, галерею, или подключите статический генератор (Jekyll, Hugo) для удобного управления контентом.</p>
+    </section>
+
+    <section id="contact" class="card" style="display:grid;grid-template-columns:1fr 320px;gap:18px">
+      <div>
+        <h3 style="margin-top:0">Связаться</h3>
+        <p class="small">Отправьте письмо на почту или используйте ссылку на профиль в GitHub.</p>
+
+        <form onsubmit="event.preventDefault(); alert('Форма показательная — добавь обработчик на сервер или форму вроде Formspree.');">
+          <div style="display:flex;gap:10px;margin-bottom:10px">
+            <input required placeholder="Имя" style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)">
+            <input required type="email" placeholder="Email" style="width:220px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)">
+          </div>
+          <textarea required placeholder="Сообщение" rows="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+          <div style="margin-top:10px"><button class="cta" type="submit">Отправить</button></div>
+        </form>
+      </div>
+
+      <div style="align-self:start">
+        <div style="font-weight:700">Контакты</div>
+        <div class="small" style="margin-top:8px">GitHub: <a href="https://github.com/" target="_blank" style="color:var(--accent);text-decoration:none">ваш-профиль</a></div>
+        <div class="small" style="margin-top:6px">Email: <a href="mailto:you@example.com" style="color:var(--accent);text-decoration:none">you@example.com</a></div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Мой сайт — сделано с ❤️ и GitHub Pages</div>
+    </footer>
+  </div>
+
+  <script>
+    // год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // тёмная/светлая тема
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('site-theme');
+    if(saved === 'light') document.documentElement.classList.add('light');
+    toggle.addEventListener('click', ()=>{
+      if(document.documentElement.classList.toggle('light')){
+        localStorage.setItem('site-theme','light');
+      } else {
+        localStorage.setItem('site-theme','dark');
+      }
+    });
+  </script>
+</body>
+</html>
